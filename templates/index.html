@@ -1,0 +1,20 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tienda LUG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Bienvenido a la Tienda de Lenguajes de Última Generación</h1>
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo Tienda" class="logo">
+    </div>
+    <div class="button-container">
+        <a href="/clientes" class="button">Gestionar Clientes</a>
+        <a href="/productos" class="button">Gestionar Productos</a>
+        <a href="/compras" class="button">Gestionar Compras</a>
+    </div>
+</body>
+</html>

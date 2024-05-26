@@ -1,0 +1,53 @@
+<!-- templates/productos.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/styles.css') }}">
+</head>
+<body>
+    <h1>Productos</h1>
+    <a href="/" class="button">Volver al inicio</a>
+    <form action="/productos/add" method="post">
+        <input type="text" name="id_producto" placeholder="ID Producto">
+        <input type="text" name="nombrep" placeholder="Nombre">
+        <input type="text" name="tproducto" placeholder="Tipo de Producto">
+        <input type="text" name="gproducto" placeholder="Grupo de Producto">
+        <button type="submit" class="button-add">Agregar Producto</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Producto</th>
+                <th>Nombre</th>
+                <th>Tipo de Producto</th>
+                <th>Grupo de Producto</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.id_producto }}</td>
+                <td>{{ producto.NombreP }}</td>
+                <td>{{ producto.TProducto }}</td>
+                <td>{{ producto.GProducto }}</td>
+                <td>
+                    <form action="/productos/update/{{ producto.id_producto }}" method="post">
+                        <input type="text" name="nombrep" value="{{ producto.NombreP }}">
+                        <input type="text" name="tproducto" value="{{ producto.TProducto }}">
+                        <input type="text" name="gproducto" value="{{ producto.GProducto }}">
+                        <button type="submit" class="button-update">Actualizar</button>
+                    </form>
+                    <form action="/productos.delete/{{ producto.id_producto }}" method="post">
+                        <button type="submit" class="button-delete">Borrar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/" class="button">Volver al inicio</a>
+</body>
+</html>

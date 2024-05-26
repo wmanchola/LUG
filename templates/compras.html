@@ -1,0 +1,59 @@
+<!-- templates/compras.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Compras</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/styles.css') }}">
+</head>
+<body>
+    <h1>Compras</h1>
+    <a href="/" class="button">Volver al inicio</a>
+    <form action="/compras/add" method="post">
+        <input type="text" name="id_cliente" placeholder="ID Cliente">
+        <input type="text" name="id_producto" placeholder="ID Producto">
+        <input type="text" name="cantidad" placeholder="Cantidad">
+        <input type="text" name="preciou" placeholder="Precio Unitario">
+        <button type="submit" class="button-add">Agregar Compra</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Documento</th>
+                <th>ID Cliente</th>
+                <th>ID Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Valor Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for compra in compras %}
+            <tr>
+                <td>{{ compra.id_doc }}</td>
+                <td>{{ compra.id_cliente }}</td>
+                <td>{{ compra.id_producto }}</td>
+                <td>{{ compra.Cantidad }}</td>
+                <td>{{ compra.PrecioU }}</td>
+                <td>{{ compra.Valor_total }}</td>
+                <td>
+                    <form action="/compras/update/{{ compra.id_doc }}" method="post">
+                        <input type="text" name="id_cliente" value="{{ compra.id_cliente }}">
+                        <input type="text" name="id_producto" value="{{ compra.id_producto }}">
+                        <input type="text" name="cantidad" value="{{ compra.Cantidad }}">
+                        <input type="text" name="preciou" value="{{ compra.PrecioU }}">
+                        <button type="submit" class="button-update">Actualizar</button>
+                    </form>
+                    <form action="/compras/delete/{{ compra.id_doc }}" method="post">
+                        <button type="submit" class="button-delete">Borrar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="/" class="button">Volver al inicio</a>
+</body>
+</html>

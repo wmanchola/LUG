@@ -1,0 +1,54 @@
+<!-- templates/clientes.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/styles.css') }}">
+</head>
+<body>
+    <h1>Clientes</h1>
+    <a href="/" class="button">Volver al inicio</a>
+    <form action="/clientes/add" method="post">
+        <input type="text" name="id_cliente" placeholder="ID Cliente">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <input type="text" name="tdocumento" placeholder="Tipo de Documento">
+        <input type="text" name="telefono" placeholder="Teléfono">
+        <button type="submit" class="button-add">Agregar Cliente</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Cliente</th>
+                <th>Nombre</th>
+                <th>Tipo de Documento</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente.id_cliente }}</td>
+                <td>{{ cliente.Nombre }}</td>
+                <td>{{ cliente.TDocumento }}</td>
+                <td>{{ cliente.Telefono }}</td>
+                <td>
+                    <form action="/clientes/update/{{ cliente.id_cliente }}" method="post">
+                        <input type="text" name="nombre" value="{{ cliente.Nombre }}">
+                        <input type="text" name="tdocumento" value="{{ cliente.TDocumento }}">
+                        <input type="text" name="telefono" value="{{ cliente.Telefono }}">
+                        <button type="submit" class="button-update">Actualizar</button>
+                    </form>
+                    <form action="/clientes/delete/{{ cliente.id_cliente }}" method="post">
+                        <button type="submit" class="button-delete">Borrar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="/" class="button">Volver al inicio</a>
+</body>
+</html>
